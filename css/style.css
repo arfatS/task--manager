@@ -112,12 +112,29 @@ h2{
     border: none;
     outline: none;
 }
+.header{
+    position: relative;
+}
 .profile-name{
     display: inline-block;
-    float: right;
     font-size: 18px;
-    margin-top: 14px;
+    position: absolute;
+    top: 14px;
+    right: 40px;
 }
+.profile-name a{
+    text-decoration: none;
+    color: #47525E;
+}
+.small-picture{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    right: 0px;
+}
+
 .tasks-content button{
     margin: 30px 0;
 }
@@ -125,7 +142,7 @@ h2{
 table{
     width: 100%;
     text-align: center;
-    font-size: 16px;
+    font-size: 18px;
     border-collapse: collapse;
 }
 thead{
@@ -134,4 +151,46 @@ thead{
 table,th,td{
     border: 1px solid rgb(197, 202, 209);
     padding: 15px;
+}
+
+.check-task{
+    width: 22px;
+    height: 22px;
+;
+}
+.edit-task{
+    color:#4397D6;
+    font-size: 22px;
+}
+.delete-task{
+    color:#ff0000;
+    font-size: 22px;
+}
+
+.profile-content{
+    margin-top: 60px;
+    display: inline-block;
+}
+.profile-content img{
+    width: 200px;
+    height: 200px;
+}
+.user-name{
+    font-size: 20px;
+    font-weight: 700;
+}
+.user-email{
+    margin-top: -12px;
+    font-size: 18px;
+}
+
+.update-form{
+    display: inline-block;
+    margin-left: 20%;
+    width: 40%;
+    text-align: left;
+}
+input[type='file']{
+    padding: 10px;
+    height: 41px;
 }
