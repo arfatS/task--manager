@@ -1,0 +1,89 @@
+{{>head}}
+
+<body>
+    <div class="main-content">
+        <div class="header">
+            <div class="logo-image">
+                <a href="/"><img src="img/logo.png" alt="logo"></a>
+            </div>
+            <div class="profile-name">
+                <a href="/profile">Arfat Sarole</a>
+            </div>
+            <div id="profile-icon">
+                <img class="small-picture" src="img/picture.jpg" alt="profile">            
+                <i id="dropdown-icon" class="fa fa-caret-down" aria-hidden="true"></i>
+            </div>
+
+            <div class="dropdown-menu">
+                <a href="/profile">Profile</a>
+                <a href="/tasks">Tasks</a>
+                <a href="">Logout</a>
+            </div>
+        </div>
+
+        <div class="tasks-content">
+            <button class="button">Add task</button>
+            <h2>Your tasks</h2>
+            <div class="table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Description</th>
+                            <th>Completed</th>
+                            <th colspan="2">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="task">
+                            <td>1</td>
+                            <td>Go to gym</td>
+                            <td>
+                                <input class="check-task" type="checkbox" name="" id="">
+                            </td>
+                            <td class="edit-task"><i class="fa fa-edit"></i></td>
+                            <td class="delete-task"><i class="fa fa-trash"></i></td>
+                        </tr>
+                        <tr class="task">
+                            <td>2</td>
+                            <td>Buy bread</td>
+                            <td>
+                                <input class="check-task" type="checkbox" name="" id="">
+                            </td>
+                            <td class="edit-task"><i class="fa fa-edit"></i></td>
+                            <td class="delete-task"><i class="fa fa-trash"></i></td>
+                        </tr>
+                        
+                        <tr class="task">
+                            <td>3</td>
+                            <td>Watch youtube videos</td>
+                            <td>
+                                <input class="check-task" type="checkbox" name="" id="">
+                            </td>
+                            <td class="edit-task"><i class="fa fa-edit"></i></td>
+                            <td class="delete-task"><i class="fa fa-trash"></i></td>
+                        </tr>
+                        <tr class="task">
+                            <td>4</td>
+                            <td>Book a ticket to Afghanistan</td>
+                            <td>
+                                <input class="check-task" type="checkbox" name="" id="">
+                            </td>
+                            <td class="edit-task"><i class="fa fa-edit"></i></td>
+                            <td class="delete-task"><i class="fa fa-trash"></i></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            
+            </div>
+            
+        </div>
+
+    </div>
+
+
+
+    <script src="js/script.js"></script>
+</body>
+</html>
