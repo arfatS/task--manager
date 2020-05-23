@@ -1,0 +1,46 @@
+<div class="main-content">
+    <div class="header">
+        <div class="logo-image">
+            <a href="/"><img src="/img/logo.png" alt="logo"></a>
+        </div>
+        <div class="profile-name">
+            <a href="/users/profile"><%= user.name %></a>
+        </div>
+        <div id="profile-icon">
+            <img class="small-picture" src="/img/picture.jpg" alt="profile">            
+            <i id="dropdown-icon" class="fa fa-caret-down" aria-hidden="true"></i>
+        </div>
+
+        <div class="dropdown-menu">
+            <a href="/users/profile">Profile</a>
+            <a href="/users/tasks">Tasks</a>
+            <a href="/users/logout">Logout</a>
+        </div>
+    </div>
+
+    <div class="profile-content">
+            <img src="/img/picture.jpg" alt="Profile">
+            <p class="user-name"><%= user.name %> - <%= user.age %></p>
+
+            <p class="user-email"><%= user.email %></p>
+    </div>
+    
+    <div class="update-form">
+        <h2>Profile Update</h2>
+
+        <%- include ("../partials/messages") %>
+
+        <form action="/users/profile" method="POST" enctype="multipart/form-data" autocomplete="off">
+            <input class="form-input" type="text" name="name" id="name" placeholder="Name">
+            <input class="form-input" type="text" name="age" id="age" placeholder="Age">
+            <input class="form-input" type="email" name="email" id="email" placeholder="Email Id">
+            <input class="form-input" type="file" name="picture" id="picture">
+
+            <input type="hidden" name="id" value="<%= user._id %>">
+            <button class="button">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+<script src="/js/script.js"></script>

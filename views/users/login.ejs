@@ -1,0 +1,27 @@
+<div class="main-content">
+    <div class="header">
+        <div class="logo-image">
+            <a href="/"><img src="/img/logo.png" alt="logo"></a>
+        </div>
+    </div>
+
+    <div class="form-content">
+        <h2>Login</h2>
+
+        <%- include ("../partials/messages") %>
+
+        <form method="POST" action="/users/login" autocomplete="off">
+            <input class="form-input" type="email" name="email" id="email" placeholder="Email Id">
+            <input class="form-input" type="password" name="password" id="password" placeholder="Password">
+            <button class="button">Login</button>
+        </form>
+    </div>
+
+    <div class="account-info">
+        <p>New user? <a href="/users/signup">Create account</a></p>
+    </div>
+
+    <%- include ("../partials/footer") %>
+
+</div>
+

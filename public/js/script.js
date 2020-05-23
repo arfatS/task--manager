@@ -18,13 +18,3 @@ checkTasks.forEach( (checkTask, i) => {
     })
 })
 
-//Form validation
-
-const name = document.querySelector('#name')
-const email = document.querySelector('#email')
-const password = document.querySelector('#password')
-const submitBtn = document.querySelector('#submit')
-
-submitBtn.addEventListener('click', () => {
-    
-})

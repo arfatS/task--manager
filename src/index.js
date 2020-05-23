@@ -1,83 +1,60 @@
-const express = require('express')
-const path = require('path')
-const hbs = require('hbs')
-const bodyParser = require('body-parser')
+const express = require("express")
+const expressLayouts = require("express-ejs-layouts")
+const flash = require('connect-flash')
+const session = require('express-session')
+const passport = require('passport')
 
-// const userRouter = require('./routers/user')
-// const taskRouter = require('./routers/task')
-require('./db/mongoose')
+const path = require('path')
 
 const app = express()
 const port = process.env.PORT
 
-const publicPath = path.join(__dirname, '../public')
-const viewsPath = path.join(__dirname, '../templates/views')
-const partialsPath = path.join(__dirname, '../templates/partials')
+//Passport config
+require('../config/passport')(passport)
 
-app.use(express.static(publicPath))
-app.set('view engine', 'hbs')
-app.set('views', viewsPath)
-hbs.registerPartials(partialsPath)
+//Mongoose connect
+require('./db/mongoose')
 
-app.use(express.json())
-// app.use(userRouter)
-// app.use(taskRouter)
+//Serve static files
+app.use(express.static(path.join(__dirname,'../public')))
 
-app.use(bodyParser.urlencoded({extended: false}))
+//EJS
+app.use(expressLayouts)
+app.set("view engine", "ejs")
 
-app.get('', (req, res) => {
+//Bodyparser
+app.use(express.urlencoded({ extended: false }))
+
+//Express session
+app.use(session({
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true,
+}))
+
+//Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Connect flash
+app.use(flash())
+
+//Global variables
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg')
+    res.locals.error_msg = req.flash('error_msg')
+    res.locals.error = req.flash('error')
+
+    next()
+})
+
+//Routes
+app.get('/', (req, res) => {
     res.render('index')
 })
-
-app.get('/signup', (req, res) => {
-    res.render('signup')
-})
-
-app.get('/login', (req, res) => {
-    res.render('login')
-})
-
-app.get('/tasks', (req, res) => {
-    res.render('tasks')
-})
-
-app.get('/profile', (req, res) => {
-    res.render('profile')
-})
-
-const multer = require('multer')
-const sharp = require('sharp')
-const User = require('./models/user')
-const auth = require('./middleware/auth')
-const emails = require('./emails/account')
-
-app.post('/users', async (req, res) => {
-    const user = new User(req.body)
-    try {
-        await user.save()
-        // emails.sendWelcomeEmail(user.email, user.name)
-        const token = await user.generateAuthToken()
-        res.status(201).send({user, token})
-    } catch (error) {
-        res.status(400).send(error)
-    }
-})
-
-
-
-
-
-
-
-
-
-
-
-
-app.get('*', (req,res) => {
-    res.send('404 Page not found')
-})
+app.use("/users", require("./routes/users"))
+app.use("/users/tasks", require("./routes/tasks"))
 
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
+  console.log(`Server is running on port ${port}`)
 })
