@@ -3,20 +3,31 @@ const router = express.Router()
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
 
-const { ensureAuthenticated } = require('../../config/auth')
+const { ensureAuthenticated, checkAuth } = require('../../config/auth')
 const User = require('../models/user')
+const Task = require('../models/task')
 
-router.get('/signup', (req, res) => {
+router.get('/signup', checkAuth, (req, res) => {
     res.render('users/signup')
 })
 
-router.get('/login', (req, res) => {
+router.get('/login', checkAuth, (req, res) => {
     res.render('users/login')
 })
 
 router.get('/tasks', ensureAuthenticated, (req, res) => {
-    res.render('users/tasks',{
-        user: req.user
+
+    req.user.populate({
+        path: 'tasks',
+
+    }).execPopulate()
+    .then(() => {
+        res.render('users/tasks',{
+            user: req.user
+        })
+    })
+    .catch((error) => {
+        res.send({ error })
     })
 })
 
@@ -106,7 +117,7 @@ router.get('/logout', (req, res) => {
 router.post('/profile', (req, res) => {
     const { name, age, email, id, picture } = req.body
 
-    User.findById(id)
+    User.findById(id) //Better way in Task update
     .then((user) => {
 
         if (name) {

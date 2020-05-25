@@ -6,5 +6,14 @@ module.exports = {
         }else{
             next()
         }
-    }
+    },
+
+    checkAuth(req, res, next) {
+        if (req.isAuthenticated()) {
+            res.redirect('/users/tasks')
+        }else{
+            next()
+        }
+    },
+
 }

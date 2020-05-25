@@ -49,9 +49,11 @@ app.use((req, res, next) => {
 })
 
 //Routes
+
 app.get('/', (req, res) => {
-    res.render('index')
+  res.render('index',{ user: req.user })
 })
+
 app.use("/users", require("./routes/users"))
 app.use("/users/tasks", require("./routes/tasks"))
 

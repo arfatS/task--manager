@@ -19,63 +19,60 @@
     </div>
 
     <div class="tasks-content">
-        <a href="/users/tasks/add" class="button" id="addBtn">Add task</a>
+        
+        <% if(user.tasks.length > 0) { %>
+            
+            <a href="/users/tasks/add" class="button" id="addBtn">Add task</a>
+            <h2>Your tasks</h2>
 
-        <h2>Your tasks</h2>
-        <div class="table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Description</th>
-                        <th>Completed</th>
-                        <th colspan="2">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="task">
-                        <td>1</td>
-                        <td>Go to gym</td>
-                        <td>
-                            <input class="check-task" type="checkbox" name="" id="">
-                        </td>
-                        <td class="edit-task"><i class="fa fa-edit"></i></td>
-                        <td class="delete-task"><i class="fa fa-trash"></i></td>
-                    </tr>
-                    <tr class="task">
-                        <td>2</td>
-                        <td>Buy bread</td>
-                        <td>
-                            <input class="check-task" type="checkbox" name="" id="">
-                        </td>
-                        <td class="edit-task"><i class="fa fa-edit"></i></td>
-                        <td class="delete-task"><i class="fa fa-trash"></i></td>
-                    </tr>
-                    
-                    <tr class="task">
-                        <td>3</td>
-                        <td>Watch youtube videos</td>
-                        <td>
-                            <input class="check-task" type="checkbox" name="" id="">
-                        </td>
-                        <td class="edit-task"><i class="fa fa-edit"></i></td>
-                        <td class="delete-task"><i class="fa fa-trash"></i></td>
-                    </tr>
-                    <tr class="task">
-                        <td>4</td>
-                        <td>Book a ticket to Afghanistan</td>
-                        <td>
-                            <input class="check-task" type="checkbox" name="" id="">
-                        </td>
-                        <td class="edit-task"><i class="fa fa-edit"></i></td>
-                        <td class="delete-task"><i class="fa fa-trash"></i></td>
-                    </tr>
-                    
-                </tbody>
-            </table>
-        
-        </div>
-        
+            <div class="table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Completed</th>
+                            <th colspan="2">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    
+                        <% user.tasks.forEach((task, index) => { %>
+                            
+                            <tr class="task">
+                                <td><%= index+1 %></td>
+                                <td><%= task.name %></td>
+                                <td>
+                                    <input class="check-task" type="checkbox" name="" id="">
+                                </td>
+                                <td>
+                                    <a href="/users/tasks/update/<%= task._id %>" class="edit-task"><i class="fa fa-edit"></i></a>
+                                </td>  
+                                <td>
+                                    <form action="/users/tasks/delete" method="POST" onsubmit="return confirm('Delete task?')">
+                                        <input type="hidden" name="id" value="<%= task._id %>">
+                                        <button type="submit" class="delete-task"><i class="fa fa-trash"></i></button>
+                                    </form>
+                                </td>
+                            </tr>                    
+                            
+                        <% }) %>
+                       
+                    </tbody>
+                </table>
+            
+            </div>
+            
+        <% } else { %>
+
+            <div class="first-task">
+                <h2>Create your first task !!</h2>
+                <a href="/users/tasks/add" class="button" id="addBtn" style="margin: 30px auto;">Add task</a>
+                <img src="/img/logo.png" alt="">
+            </div>
+
+
+        <% } %>
     </div>
 
 </div>

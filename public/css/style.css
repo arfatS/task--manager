@@ -41,7 +41,7 @@ body{
     display: inline-block;
     float: right;
     font-size: 22px;
-    margin-top: 8px;
+    margin-top: 18px;
 }
 .logo-image img {
     width: 56px;
@@ -195,11 +195,17 @@ textarea{
 .dropdown-menu a:hover{
     background-color: #EFF2F7;
 }
-.tasks-content button{
-    margin: 50px 0 30px;
-}
+
 .tasks-content h2{
     margin-bottom: 20px;
+}
+.first-task{
+    margin-top: 50px;
+    text-align: center;
+}
+.first-task img{
+    margin-top: 30px;
+    width: 250px;
 }
 table{
     width: 100%;
@@ -220,13 +226,17 @@ table,th,td{
     width: 22px;
     height: 22px;
 }
-.edit-task{
-    color:#4397D6;
-    font-size: 22px;
-}
-.delete-task{
+
+.delete-task, .edit-task{
     color:#ff0000;
     font-size: 22px;
+    background: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.edit-task{
+    color:#4397D6;
 }
 .profile-content{
     margin-top: 60px;
@@ -313,6 +323,9 @@ input[type='file']{
     .form-content{
         width: 100%;
         margin-top: 30px;
+    }
+    .first-task h2{
+        font-size: 24px;
     }
     .footer{
         bottom: -150px;

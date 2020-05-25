@@ -20,13 +20,14 @@
 
 
     <div class="form-content">
-        <h2>Add task</h2>
+        <h2>Update task</h2>
 
-        <form method="POST" action="/users/tasks/add" autocomplete="off">
-            <input class="form-input" type="text" name="name" id="name" placeholder="Name">
+        <form action="/users/tasks/update" method="POST" autocomplete="off">
+            <input class="form-input" type="text" name="name" id="name" placeholder="Name" value="<%= task.name %>">
+            <textarea class="form-input" name="description" id="description" placeholder="Description"><%= task.description %></textarea>
             
-            <textarea class="form-input" name="description" id="description" placeholder="Description"></textarea>
-            <button class="button">Add</button>
+            <input type="hidden" name="id" value="<%= task._id %>">
+            <button class="button">Update</button>
         </form>
     </div>
 

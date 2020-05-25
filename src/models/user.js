@@ -30,6 +30,11 @@ const userSchema = mongoose.Schema({
     timestamps: true
 })
 
+userSchema.virtual('tasks',{
+    ref: 'Task',
+    localField: '_id',
+    foreignField: 'user_id'
+})
 
 const User = mongoose.model('User',userSchema)
 
