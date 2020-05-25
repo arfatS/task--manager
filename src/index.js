@@ -58,5 +58,5 @@ app.use("/users", require("./routes/users"))
 app.use("/users/tasks", require("./routes/tasks"))
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`)
+  (`Server is running on port ${port}`)
 })

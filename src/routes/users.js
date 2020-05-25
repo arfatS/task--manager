@@ -115,33 +115,23 @@ router.get('/logout', (req, res) => {
 
 //Update user
 router.post('/profile', (req, res) => {
-    const { name, age, email, id, picture } = req.body
 
-    User.findById(id) //Better way in Task update
+    //No need of findById as we have user in req.user
+
+    const updates = Object.keys(req.body)
+
+    updates.forEach((update) => req.user[update] = req.body[update])
+
+    req.user.save()
     .then((user) => {
-
-        if (name) {
-            req.user.name = name
-        }
-        if (age) {
-            req.user.age = age
-        }
-        if (email) {    
-            req.user.email = email
-        }
-        
-        req.user.save()
-        .then((user) => {
-            req.flash('success_msg', 'Updated successfully')
-            res.redirect('/users/profile')
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+        req.flash('success_msg', 'Updated successfully')
+        res.redirect('/users/profile')
     })
     .catch((error) => {
-        console.log(error)
+        res.send({ error })
     })
+
+
 })
 
 module.exports = router

@@ -44,6 +44,33 @@ router.post('/add', (req, res) => {
     })
 })
 
+//Check task
+router.post('/check/:id', (req, res) => {
+    const _id = req.params.id
+
+    Task.findById(_id)
+    .then((task) => {
+        
+        if(task.completed){
+            task.completed = false
+        }else{
+            task.completed = true
+        }
+
+        task.save()
+        .then(() => {
+            res.redirect('/users/tasks')
+        })
+        .catch((error) => {
+            res.send({ error })
+        })
+
+    })
+    .catch((error) => {
+        res.send({ error })
+    })
+})
+
 //Update task
 router.post('/update', (req, res) => {
     const { name, description, id } = req.body

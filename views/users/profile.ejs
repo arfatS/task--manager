@@ -30,11 +30,10 @@
 
         <%- include ("../partials/messages") %>
 
-        <form action="/users/profile" method="POST" enctype="multipart/form-data" autocomplete="off">
-            <input class="form-input" type="text" name="name" id="name" placeholder="Name">
-            <input class="form-input" type="text" name="age" id="age" placeholder="Age">
-            <input class="form-input" type="email" name="email" id="email" placeholder="Email Id">
-            <input class="form-input" type="file" name="picture" id="picture">
+        <form action="/users/profile" method="POST"  autocomplete="off">
+            <input class="form-input" type="text" name="name" id="name" placeholder="Name" value="<%= user.name %>">
+            <input class="form-input" type="text" name="age" id="age" placeholder="Age" value="<%= user.age %>">
+            <input class="form-input" type="email" name="email" id="email" placeholder="Email Id" value="<%= user.email %>"> 
 
             <input type="hidden" name="id" value="<%= user._id %>">
             <button class="button">Submit</button>
