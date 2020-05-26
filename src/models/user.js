@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema({
     },
     email: {
         type: String,
-        unique: true,
+        email: unique,
         required: true,
         trim: true,
         lowercase: true,
@@ -26,6 +26,10 @@ const userSchema = mongoose.Schema({
     picture: {
         type: Buffer
     },
+    isAdmin:{
+        type: Boolean,
+        default: false
+    }
 },{
     timestamps: true
 })

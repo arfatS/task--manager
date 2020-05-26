@@ -1,0 +1,67 @@
+<div class="main-content">
+    <div class="header">
+        <div class="logo-image">
+            <a href="/"><img src="/img/logo.png" alt="logo"></a>
+        </div>
+        <div class="profile-name">
+            <a href="/users/profile"><%= user.name %></a>
+        </div>
+        <div id="profile-icon">
+            <img class="small-picture" src="/img/picture.jpg" alt="profile">            
+            <i id="dropdown-icon" class="fa fa-caret-down" aria-hidden="true"></i>
+        </div>
+
+        <div class="dropdown-menu">
+            <% if(user.isAdmin) { %>
+                <a href="/users/dashboard">Dashboard</a>
+            <% } %>
+            <a href="/users/profile">Profile</a>
+            <a href="/users/tasks">Tasks</a>
+            <a href="/users/logout">Logout</a>
+        </div>
+    </div>
+
+    <div class="tasks-content">
+        
+        <h2 style="margin: 30px 0;">Users</h2>
+
+        <div class="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th colspan="2">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <% users.forEach((user, index) => { %>
+                        
+                        <tr class="task">
+                            <td><%= index+1 %></td>
+                            <td><%= user.name %></td>
+                
+                            <td>
+                                <a href="" class="edit-task"><i class="fa fa-edit"></i></a>
+                            </td>  
+                            <td>
+                                <form action="" method="POST" onsubmit="return confirm('Delete task?')">
+                                    <input type="hidden" name="id" value="<%= user._id %>">
+                                    <button type="submit" class="delete-task"><i class="fa fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>                    
+                        
+                    <% }) %>
+                    
+                </tbody>
+            </table>
+        
+        </div>
+    </div>
+
+</div>
+
+
+<script src="/js/script.js"></script>

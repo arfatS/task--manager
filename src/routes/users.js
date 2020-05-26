@@ -37,6 +37,27 @@ router.get('/profile', ensureAuthenticated, (req, res) => {
     })
 })
 
+router.get('/dashboard', ensureAuthenticated, (req, res) => {
+    if (!req.user.isAdmin) {
+        res.redirect('/users/tasks')
+    }else{
+
+        User.find()
+        .then((users) => {
+
+            
+            res.render('users/dashboard',{
+                user: req.user,
+                users,
+            })
+        })
+        .catch((error) => {
+            res.send({ error })
+        })
+    }
+})
+
+
 
 //Register user
 router.post('/signup', (req,res) => {
@@ -96,7 +117,6 @@ router.post('/signup', (req,res) => {
 
 })
 
-
 //Login user
 router.post('/login', (req, res, next) => {
     passport.authenticate('local',{
@@ -105,6 +125,8 @@ router.post('/login', (req, res, next) => {
         failureFlash: 'Please fill in all the fields'
     })(req, res, next)
 })
+
+
 
 //Logout user
 router.get('/logout', (req, res) => {

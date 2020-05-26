@@ -49,7 +49,6 @@ app.use((req, res, next) => {
 })
 
 //Routes
-
 app.get('/', (req, res) => {
   res.render('index',{ user: req.user })
 })
@@ -57,6 +56,9 @@ app.get('/', (req, res) => {
 app.use("/users", require("./routes/users"))
 app.use("/users/tasks", require("./routes/tasks"))
 
+
+
+
 app.listen(port, () => {
-  (`Server is running on port ${port}`)
+  console.log(`Server is running on port ${port}`)
 })
