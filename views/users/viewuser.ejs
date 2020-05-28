@@ -1,0 +1,77 @@
+<div class="main-content">
+    <div class="header">
+        <div class="logo-image">
+            <a href="/"><img src="/img/logo.png" alt="logo"></a>
+        </div>
+        <div class="profile-name">
+            <a href="/users/profile"><%= user.name %></a>
+        </div>
+        <div id="profile-icon">
+            <img class="small-picture" src="/img/picture.jpg" alt="profile">            
+            <i id="dropdown-icon" class="fa fa-caret-down" aria-hidden="true"></i>
+        </div>
+
+        <div class="dropdown-menu">
+            <% if(user.isAdmin) { %>
+                <a href="/users/dashboard">Dashboard</a>
+            <% } %>
+            <a href="/users/profile">Profile</a>
+            <a href="/users/tasks">Tasks</a>
+            <a href="/users/logout">Logout</a>
+        </div>
+    </div>
+
+    
+    <div class="tasks-content">
+        
+        <h3>Name : <%= viewuser.name %></h3>
+        <h3>Age : <%= viewuser.age %></h3>
+        <h3>Email : <%= viewuser.email %></h3>
+
+
+        <% if(viewuser.tasks.length > 0) { %>
+            
+            <h3>Tasks by <%= viewuser.name %></h3>
+
+            <div class="table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Completed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    
+                        <% viewuser.tasks.forEach((task, index) => { %>
+                            
+                            <tr class="task">
+                                <td><%= index+1 %></td>
+                                <td><%= task.name %></td>
+                                <td><%= task.description %></td>
+                                <td><%= task.completed %></td>
+                                
+                            </tr>                    
+                            
+                        <% }) %>
+                        
+                    </tbody>
+                </table>
+            
+            </div>
+            
+        <% } else { %>
+
+            <h3>No tasks by  <%= viewuser.name %></h3>
+
+
+        <% } %>
+    </div>
+
+
+</div>
+
+
+<script src="/js/script.js"></script>

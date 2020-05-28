@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema({
     },
     email: {
         type: String,
-        email: unique,
+        unique: true,
         required: true,
         trim: true,
         lowercase: true,
@@ -39,6 +39,7 @@ userSchema.virtual('tasks',{
     localField: '_id',
     foreignField: 'user_id'
 })
+
 
 const User = mongoose.model('User',userSchema)
 

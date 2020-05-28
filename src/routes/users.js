@@ -44,12 +44,42 @@ router.get('/dashboard', ensureAuthenticated, (req, res) => {
 
         User.find()
         .then((users) => {
-
             
             res.render('users/dashboard',{
                 user: req.user,
                 users,
             })
+        })
+        .catch((error) => {
+            res.send({ error })
+        })
+    }
+})
+
+router.get('/profile/:id', ensureAuthenticated, (req, res) => {
+    if (!req.user.isAdmin) {
+        res.redirect('/users/tasks')
+    }else{
+        const _id = req.params.id
+
+        User.findById(_id)
+        .then((viewuser) => {
+
+            viewuser.populate({
+                path: 'tasks',
+
+            }).execPopulate()
+            .then(() => {    
+                res.render('users/viewuser',{
+                    user: req.user,
+                    viewuser,
+                })
+            })
+            .catch((error) => {
+                res.send({ error })
+            })
+
+
         })
         .catch((error) => {
             res.send({ error })
@@ -122,7 +152,7 @@ router.post('/login', (req, res, next) => {
     passport.authenticate('local',{
         successRedirect: '/users/tasks',
         failureRedirect: '/users/login',
-        failureFlash: 'Please fill in all the fields'
+        failureFlash: true
     })(req, res, next)
 })
 
@@ -152,7 +182,25 @@ router.post('/profile', (req, res) => {
     .catch((error) => {
         res.send({ error })
     })
+})
 
+//Delete task
+router.post('/delete', (req, res) => {
+    
+    User.findByIdAndDelete(req.body.id)
+    .then((user) => {
+
+        Task.deleteMany({ user_id: user._id})
+        .then(() => {
+            res.redirect('/users/dashboard')
+        })
+        .catch((error) => {
+            res.send({ error })
+        })
+    })
+    .catch((error) => {
+        res.send({ error })
+    })
 
 })
 

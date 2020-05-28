@@ -40,13 +40,13 @@
                         
                         <tr class="task">
                             <td><%= index+1 %></td>
-                            <td><%= user.name %></td>
+                            <td><a href="/users/profile/<%= user._id %>"><%= user.name %></a></td>
                 
                             <td>
-                                <a href="" class="edit-task"><i class="fa fa-edit"></i></a>
+                                <a href="#" class="edit-task"><i class="fa fa-edit"></i></a>
                             </td>  
                             <td>
-                                <form action="" method="POST" onsubmit="return confirm('Delete task?')">
+                                <form action="/users/delete" method="POST" onsubmit="return confirm('Delete user?')">
                                     <input type="hidden" name="id" value="<%= user._id %>">
                                     <button type="submit" class="delete-task"><i class="fa fa-trash"></i></button>
                                 </form>
