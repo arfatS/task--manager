@@ -264,6 +264,12 @@ input[type='file']{
     padding: 10px;
     height: 41px;
 }
+#viewuser{
+    text-decoration: none;
+    color: #47525E;
+}
+
+
 
 @media only screen and (max-width: 768px) {
     .main-image{
