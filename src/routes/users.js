@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
+const multer = require('multer')
+const sharp = require('sharp')
 
 const { ensureAuthenticated, checkAuth } = require('../../config/auth')
 const User = require('../models/user')
@@ -204,4 +206,44 @@ router.post('/delete', (req, res) => {
 
 })
 
+//File uploads
+const upload = multer({
+    // dest: 'pictures',
+    limits: {
+        fileSize: 1000000
+    },
+    fileFilter(req, file, cb) {
+        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+            return cb(new Error('Please upload a valid file type'))
+        }
+
+        cb(undefined, true)
+    }
+})
+
+router.post('/profile/picture', upload.single('picture'), (req,res) => {
+
+    sharp(req.file.buffer).resize({ width: 250, height: 250}).png().toBuffer()
+    .then((buffer) => {
+        
+        req.user.picture = buffer
+        
+        req.user.save()
+        .then((user) => {
+            req.flash('success_msg', 'Updated successfully')
+            res.redirect('/users/profile')
+        })
+        .catch((error) => {
+            res.send({ error })
+        })
+
+    })
+    .catch((error) => {
+        res.send({ error })
+    })
+    
+})
+
+
 module.exports = router
+

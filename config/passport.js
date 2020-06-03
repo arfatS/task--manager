@@ -11,6 +11,9 @@ module.exports = (passport) => {
 
         },(email, password, done) => {
 
+
+            // Verify callback - done(error, user, message)
+
             //Find by email
             User.findOne({ email })
             .then((user) => {

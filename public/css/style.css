@@ -164,8 +164,10 @@ textarea{
     height: 30px;
     border-radius: 50%;
     position: absolute;
-    top: 10px;
+    top: 8px;
     right: 16px;
+    border: 1px solid rgb(197, 202, 209)
+
 }
 #dropdown-icon{
     position: absolute;
@@ -245,6 +247,7 @@ table,th,td{
 .profile-content img{
     width: 200px;
     height: 200px;
+    border: 1px solid rgb(197, 202, 209)
 }
 .user-name{
     font-size: 20px;
@@ -261,8 +264,7 @@ table,th,td{
     text-align: left;
 }
 input[type='file']{
-    padding: 10px;
-    height: 41px;
+    margin: 10px 0;
 }
 #viewuser{
     text-decoration: none;

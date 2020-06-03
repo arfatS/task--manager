@@ -1,0 +1,26 @@
+<div class="header">
+    <div class="logo-image">
+        <a href="/"><img src="/img/logo.png" alt="logo"></a>
+    </div>
+    <div class="profile-name">
+        <a href="/users/profile"><%= user.name %></a>
+    </div>
+    <div id="profile-icon">
+
+        <% if(user.picture) { %>
+            <img  class="small-picture" src="data:image/png;base64,<%= Buffer.from(user.picture,'binary').toString('base64')%>" alt="Profile">
+        <% } else { %>
+            <img  class="small-picture" src="/img/dummy.png" alt="Profile">
+        <% } %>
+        <i id="dropdown-icon" class="fa fa-caret-down" aria-hidden="true"></i>
+    </div>
+
+    <div class="dropdown-menu">
+        <% if(user.isAdmin) { %>
+            <a href="/users/dashboard">Dashboard</a>
+        <% } %>
+        <a href="/users/profile">Profile</a>
+        <a href="/users/tasks">Tasks</a>
+        <a href="/users/logout">Logout</a>
+    </div>
+</div>

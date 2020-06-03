@@ -1,31 +1,21 @@
 <div class="main-content">
-    <div class="header">
-        <div class="logo-image">
-            <a href="/"><img src="/img/logo.png" alt="logo"></a>
-        </div>
-        <div class="profile-name">
-            <a href="/users/profile"><%= user.name %></a>
-        </div>
-        <div id="profile-icon">
-            <img class="small-picture" src="/img/picture.jpg" alt="profile">            
-            <i id="dropdown-icon" class="fa fa-caret-down" aria-hidden="true"></i>
-        </div>
-
-        <div class="dropdown-menu">
-            <% if(user.isAdmin) { %>
-                <a href="/users/dashboard">Dashboard</a>
-            <% } %>
-            <a href="/users/profile">Profile</a>
-            <a href="/users/tasks">Tasks</a>
-            <a href="/users/logout">Logout</a>
-        </div>
-    </div>
+    
+    <%- include ("../partials/header") %>
 
     <div class="profile-content">
-            <img src="/img/picture.jpg" alt="Profile">
-            <p class="user-name"><%= user.name %> - <%= user.age %></p>
 
-            <p class="user-email"><%= user.email %></p>
+        <% if(user.picture) { %>
+            <img src="data:image/png;base64,<%= Buffer.from(user.picture,'binary').toString('base64')%>" alt="Profile">
+        <% } else { %>
+            <img src="/img/dummy.png" alt="Profile">
+        <% } %>
+        
+        <form action="/users/profile/picture" method="post" enctype="multipart/form-data">
+            <input type="file" name="picture" accept=".png,.jpg,.jpeg" onChange="this.form.submit()">
+        </form>
+
+        <p class="user-name"><%= user.name %> - <%= user.age %></p>
+        <p class="user-email"><%= user.email %></p>
     </div>
     
     <div class="update-form">
@@ -42,6 +32,7 @@
             <button class="button">Submit</button>
         </form>
     </div>
+
 </div>
 
 
