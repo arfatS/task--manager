@@ -208,15 +208,15 @@ router.post('/delete', (req, res) => {
 
 //File uploads
 const upload = multer({
-    // dest: 'pictures',
+    // dest: 'uploads',
     limits: {
         fileSize: 1000000
     },
+
     fileFilter(req, file, cb) {
         if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
             return cb(new Error('Please upload a valid file type'))
         }
-
         cb(undefined, true)
     }
 })
